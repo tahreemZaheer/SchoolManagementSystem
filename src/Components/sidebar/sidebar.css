@@ -1,0 +1,28 @@
+.sidebar{
+    background: var(--white-color);
+    box-shadow: 0.5rem 0 1rem rgb(23 23 23 /17%);
+    color: var(--font-color);
+    height: 100vh;
+}
+li{
+    font-size: 1.5rem;
+}
+.sidebar{
+    font-size: 2rem;
+}
+.round-btn{
+    /* background-color: var(--blue-color); */
+    font-size: 1.25rem;
+    color: var(--font-color);
+
+    &:hover{
+        background-color: var(--font-color);
+        color: var(--white-color);
+    }
+}
+.underline-text{
+    text-decoration: none;
+    &:hover{
+        text-decoration: underline;
+    }
+}
