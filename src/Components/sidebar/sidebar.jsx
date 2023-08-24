@@ -2,11 +2,16 @@ import React from 'react'
 import './sidebar.css'
 import { Link } from 'react-router-dom'
 import { useState, useEffect } from 'react'
+import { CreateCourseModal } from '../Course/createCourseModal'
 
 
 
 export const Sidebar = () => {
+    const [showCreateCourse, setShowCreateCourse] = useState(false);
+const closeCreateCourse = ()=> setShowCreateCourse(false);
 
+    
+   
     //Mobile Menu State
     const [sidenav, setSideNav] = useState(false);
     //SideNav
@@ -25,25 +30,30 @@ export const Sidebar = () => {
         window.addEventListener('scroll', handleScroll);
         return () => window.removeEventListener('scroll', handleScroll);  //removing event listener 
     })
+
+
+
+    
     return (
         <>
             <nav className="navbar bg-body-tertiary fixed-top">
                 <div className="container">
-                    
+
                     <button className="navbar-toggler shadow-none border-0" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
                         <span className="navbar-toggler-icon"></span>
                     </button>
-                    
+
 
                     <div className='navbar-expand-lg'>
                         <div className="collapse navbar-collapse">
                             <ul className="navbar-nav justify-content-end flex-grow-1 pe-3" >
-                                <li className="nav-item mx-2 underline-text"><Link className='nav-link fs-4' to='/'>SchoolHub</Link></li>                                
+                                <li className="nav-item mx-2 underline-text"><Link className='nav-link fs-4' to='/'>SchoolHub</Link></li>
                             </ul>
-                            
+
                             <div className='d-flex justify-content-center align-items-center gap-3 '>
-                            <Link className="text-decoration-none px-3 py-1 rounded-5 round-btn " to="/">+</Link>
-                            <Link className="text-decoration-none px-3 py-1 rounded-4 round-btn " to="/">Logout</Link>
+                               <button className='border-0 rounded-circle text-decoration-none px-3 py-1 rounded-5 round-btn' onClick={()=>setShowCreateCourse(true)}> +</button>
+                                
+                                <button className="border-0 text-decoration-none px-3 py-1 rounded-4 round-btn " >Logout</button>
                             </div>
                         </div>
                     </div>
@@ -62,10 +72,7 @@ export const Sidebar = () => {
                                     <Link className="nav-link dropdown-toggle" to="/course" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                         Courses
                                     </Link>
-                                    <ul className="dropdown-menu">
-                                        <li><Link className="dropdown-item" to="/course">Course 1</Link></li>
-                                        <li><Link className="dropdown-item" to="/course">Course 2</Link></li>
-                                    </ul>
+                                    
                                 </li>
 
                                 <li className="nav-item">
@@ -77,7 +84,8 @@ export const Sidebar = () => {
                     </div>
                 </div>
             </nav>
+            {showCreateCourse && <CreateCourseModal closeCreateCourse={closeCreateCourse}/> }
         </>
-        
+
     )
 }

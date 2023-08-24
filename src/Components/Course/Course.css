@@ -1,0 +1,25 @@
+.modal-wrapper{
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 0;
+    background-color: rgba(189, 189, 189, 0.9);
+}
+.modal-container{
+    position: fixed;
+    max-width: 30rem;
+    left: 35%;
+    top: 30%;
+    right: 35%;
+    transform: translate(-15%);
+    background-color: var(--white-color);
+    padding: 2rem 3rem;
+    border-radius: 0.5rem;
+
+    @media(max-width:776px) {
+        left:20%;
+        right: 0;
+        
+    }
+}

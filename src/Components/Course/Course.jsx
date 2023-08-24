@@ -1,7 +1,18 @@
 import React from 'react'
+// import './Course.css'
 
-export const Course = () => {
+
+export const Course = ({closeCreateCourse}) => {
+
+   
   return (
-    <div className='container'>Course</div>
+    <>
+           <div className='containerr'>
+            <button >
+                create
+            </button>
+            
+           </div>
+    </>
   )
 }
