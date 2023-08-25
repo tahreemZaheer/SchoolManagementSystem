@@ -127,3 +127,6 @@ html,body{
     color: var(--font-color);
     line-height: 1.62rem;
   }
+  .login-container{
+    background-color: var(--box-shadow);
+  }
