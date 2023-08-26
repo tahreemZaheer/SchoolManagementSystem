@@ -1,7 +1,5 @@
-import React, { useEffect, useState } from 'react'
-
-
-import { CourseEdit } from './CourseEdit'
+import React, {  useState } from 'react'
+import { CourseEdit } from './CourseEdit.jsx'
 
 export const Course = () => {
 
@@ -18,7 +16,7 @@ export const Course = () => {
       desc: newDesc,
       date: new Date()
     };
-    // console.log(courses);
+    console.log(courses);
     setCourses([...courses, newCourse]);
     
     setNewTitle('');
@@ -97,7 +95,8 @@ export const Course = () => {
             </form>
           </div>
         </div>
-        <CourseEdit
+        {courses.map((courses)=>{
+          <CourseEdit
           key={courses.id}
           courseName={courses.title}
           courseDesc={courses.desc}
@@ -105,6 +104,8 @@ export const Course = () => {
           courseUpdated={onCourseUpdated}
           courseDeleted={onCourseDeleted}
         />
+        })}
+        
 
         {/* <div className='row justify-content-md-center'>
           <div className='container-fluid card-cont d-flex flex-sm-row flex-column '>
