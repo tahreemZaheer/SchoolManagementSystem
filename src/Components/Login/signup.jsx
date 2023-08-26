@@ -1,6 +1,6 @@
 import React from "react"
 import { Link } from "react-router-dom";
-import Login from "./Login";
+
 
   function Signup() {
         return(
@@ -24,9 +24,10 @@ import Login from "./Login";
                         </div>
                         <div className="d-flex justify-content-evenly">
                         <button className='border-0 text-decoration-none px-3 py-1 rounded-4 round-btn '>SignUp</button>
+                        
+                        <Link to='/login'>
                         <button
-                        onClick={<Login/>} 
-                        className='border-0 text-decoration-none px-3 py-1 rounded-4 round-btn'>login</button>
+                        className='border-0 text-decoration-none px-3 py-1 rounded-4 round-btn'>login</button></Link>
                         </div>
                     </form>
                 </div>

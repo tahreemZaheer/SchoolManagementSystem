@@ -7,6 +7,9 @@ import{Course} from './Components/Course/Course.jsx'
 import{Setting} from './Components/Settings/Setting.jsx'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import {FaHome} from 'react-icons/fa'
+import { Teachers } from './Components/Teachers/Teachers.jsx';
+import Login from './Components/Login/Login.jsx';
+import Signup from './Components/Login/signup.jsx';
 
 const routes=createBrowserRouter([{
   path:"/",
@@ -21,9 +24,21 @@ const routes=createBrowserRouter([{
   element:<Profile/>
 },
 {
- path:'/course',
- element:<Course/> 
+ path:'/login',
+ element:<Login/> 
 },
+{
+  path:'/signup',
+  element:<Signup/> 
+ },
+ {
+  path:'/course',
+  element:<Course/> 
+ },
+{
+  path:'/instructor',
+  element:<Teachers/> 
+ },
 {
   path:'/setting',
 element:<Setting/>

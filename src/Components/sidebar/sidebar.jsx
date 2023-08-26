@@ -51,9 +51,9 @@ const closeCreateCourse = ()=> setShowCreateCourse(false);
                             </ul>
 
                             <div className='d-flex justify-content-center align-items-center gap-3 '>
-                               <button className='border-0 rounded-circle text-decoration-none px-3 py-1 rounded-5 round-btn' onClick={()=>setShowCreateCourse(true)}> +</button>
+                               <Link to='/signup'><button className='border-0 text-decoration-none px-3 py-1 rounded-4 round-btn' > Sign In</button></Link>
                                 
-                                <button className="border-0 text-decoration-none px-3 py-1 rounded-4 round-btn " >Logout</button>
+                               <Link to='/login'><button className="border-0 text-decoration-none px-3 py-1 rounded-4 round-btn " >Log In</button></Link>
                             </div>
                         </div>
                     </div>
@@ -68,16 +68,21 @@ const closeCreateCourse = ()=> setShowCreateCourse(false);
                                     <Link className="nav-link active" aria-current="page" to="/">Home</Link>
                                 </li>
 
-                                <li className="nav-item dropdown">
-                                    <Link className="nav-link dropdown-toggle" to="/course" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <li className="nav-item">
+                                    <Link className="nav-link" to="/course">
                                         Courses
-                                    </Link>
-                                    
+                                    </Link>   
                                 </li>
 
                                 <li className="nav-item">
-                                    <Link className="nav-link" to="/setting">Settings</Link>
+                                    <Link className="nav-link" to="/instructor">
+                                        Instructor
+                                    </Link>   
                                 </li>
+
+                                {/* <li className="nav-item">
+                                    <Link className="nav-link" to="/setting">Settings</Link>
+                                </li> */}
                             </ul>
 
                         </div>

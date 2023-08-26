@@ -6,6 +6,27 @@ export const CreateCourseModal = ({ closeCreateCourse }) => {
 
     const [showCourse, setShowCourse] = useState(false);
 
+
+    let [courses, setCourses] = useState([]);
+  let [newTitle, setNewTitle] = useState('');
+  
+  function addCourse(event) {
+    event.preventDefault();
+
+    let newCourse = {
+      id: courses.length + 1,
+      title: newTitle,
+      date: new Date()
+    };
+    setCourses([...courses, newCourse]);
+    setNewTitle('');
+    console.log(courses);
+  }
+
+  function handleInputChange(event) {
+    setNewTitle(event.target.value);
+  }
+
     const handleShowCourse = (e) => {
         e.preventDefault();
         setShowCourse(true);
@@ -56,7 +77,7 @@ export const CreateCourseModal = ({ closeCreateCourse }) => {
                         
                         <button type="submit"
                             className="border-0 text-decoration-none px-3 py-1 rounded-4 round-btn "
-                            onClick={handleShowCourse}>
+                            onSubmit={handleShowCourse}>
                             Create
                         </button>
                     </div>

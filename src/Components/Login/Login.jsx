@@ -1,7 +1,7 @@
 import React,{useState} from "react"
 import { Link } from "react-router-dom";
 import Signup from "./signup";
-import Home from '../Home/Home'
+import {Home} from '../Home/Home'
 
   function Login() {
     const [showSignup, setShowSignup] =   useState(false);
@@ -37,11 +37,9 @@ import Home from '../Home/Home'
           <button 
           onClick={handleHome}
           className='border-0 text-decoration-none px-3 py-1 rounded-4 round-btn '>log in</button>
-          {showHome && <Home/>}
-          <button
-          onClick={handleSignUp} 
-          className='border-0 text-decoration-none px-3 py-1 rounded-4 round-btn '>Create Account</button>
-          {showSignup && <Signup/>}
+          
+          <Link to='/signup'><button className='border-0 text-decoration-none px-3 py-1 rounded-4 round-btn '>Create Account</button></Link>
+          
          </div>
          </form>
       </div>
