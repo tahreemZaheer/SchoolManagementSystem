@@ -1,5 +1,6 @@
 import React,{useState} from "react"
 import { Link } from "react-router-dom";
+import { signup } from "../../services/auth.service";
 
 
   function Signup() {
@@ -7,6 +8,22 @@ import { Link } from "react-router-dom";
     const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+
+const handleSignup = () => {
+    let formData = new FormData();
+    formData.append("username", username);
+    formData.append("email", email);
+    formData.append("password", password);
+
+    signup(formData).then=(user)=>{
+         console.log(user);
+    };
+
+
+    
+
+};
+    
         return(
       <div className='d-flex justify-content-center align-items-center vh-100 '>
                 <div className='login-container p-3 rounded w-25'>
@@ -36,11 +53,10 @@ import { Link } from "react-router-dom";
 
                         </div>
                         <div className="d-flex justify-content-evenly">
-                        <button className='border-0 text-decoration-none px-3 py-1 rounded-4 round-btn '>SignUp</button>
+                        <button className='border-0 text-decoration-none px-3 py-1 rounded-4 round-btn'> SignUp </button>
                         
                         <Link to='/login'>
-                        <button
-                        className='border-0 text-decoration-none px-3 py-1 rounded-4 round-btn'>login</button></Link>
+                        <button className='border-0 text-decoration-none px-3 py-1 rounded-4 round-btn' onClick={handleSignup}> login </button></Link>
                         </div>
                     </form>
                 </div>

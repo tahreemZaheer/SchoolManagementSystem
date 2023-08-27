@@ -2,7 +2,7 @@ import React from 'react'
 import './sidebar.css'
 import { Link } from 'react-router-dom'
 import { useState, useEffect } from 'react'
-import { CreateCourseModal } from '../Course/createCourseModal'
+import { CreateCoursePage } from '../Course/CreateCourseModal.jsx'
 
 
 
@@ -89,7 +89,7 @@ const closeCreateCourse = ()=> setShowCreateCourse(false);
                     </div>
                 </div>
             </nav>
-            {showCreateCourse && <CreateCourseModal closeCreateCourse={closeCreateCourse}/> }
+            {showCreateCourse && <CreateCoursePage closeCreateCourse={closeCreateCourse}/> }
         </>
 
     )

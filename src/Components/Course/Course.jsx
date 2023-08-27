@@ -1,144 +1,65 @@
-import React, {  useState } from 'react'
-import { CourseEdit } from './CourseEdit.jsx'
+import React, {  useState, useEffect } from 'react'
+import { getCourse } from '../../services/posts.service.js';
+import { Link } from "react-router-dom";
 
 export const Course = () => {
 
-  let [courses, setCourses] = useState([]);
-  let [newTitle, setNewTitle] = useState('');
-  let [newDesc, setNewDesc] = useState('');
-  
-  function addCourse(event) {
-    event.preventDefault();
+  let [posts, setPosts] = useState([]);
+  useEffect(()=>{
+    getCourse().
+    then((posts)=>{
+      setPosts(posts);
+    }).
+    catch(err=>{
 
-    let newCourse = {
-      id: courses.length + 1,
-      title: newTitle,
-      desc: newDesc,
-      date: new Date()
-    };
-    console.log(courses);
-    setCourses([...courses, newCourse]);
-    
-    setNewTitle('');
-    setNewDesc('');
-    
-  }
-
-  function handleCourseTitle(event) {
-    setNewTitle(event.target.value);
-  }
-  function handleCourseDescription(event) {
-    setNewDesc(event.target.value);
-  }
-
-  function onCourseUpdated(updatedCourse) {
-    let updatedCourses = courses.map((currentCourse) => {
-      if (currentCourse.id === updatedCourse.id) {
-        return updatedCourse;
-      } else {
-        return currentCourse;
-      }
     });
-    setCourses([...updatedCourses]);
-  }
+  });
 
-  function onCourseDeleted(deletedCourse) {
-    let filteredCourses = courses.filter((course) => {
-      /** We need to only keep those tasks which are not deleted */
-      if (course.id !== deletedCourse.id) {
-        return course;
-      }
-    });
 
-    setCourses(filteredCourses);
-  }
   return (
     <>
-      <div className='containerr '>
-        <div className="container-fluid d-flex justify-content-center">
-          <div className='modal-container'>
-            <h3>Create Class</h3>
-            <form className="row g-3"
-              onSubmit={addCourse}>
-              <div className="mb-3">
-                <label htmlFor="formGroupExampleInput" className="form-label">
-                  Course Name
-                </label>
-                <input
-                  type="text"
-                  className="form-control"
-                  id="formGroupExampleInput"
-                  placeholder="Data Structures"
-                  value={newTitle}
-                  onChange={handleCourseTitle}
-                />
+      <div className="container mt-5">
+        <div className="card my-2">
+          <div className="card-body">
+            <div className="d-flex justify-content-between">
+              <h1>Manage Posts</h1>
+              <div className="d-flex">
+              <Link to="add-post" className="btn btn-success float-end me-2">Manage Users</Link>
+              <Link to="add-post" className="btn btn-success float-end">+ Add Post</Link>
               </div>
-              <div className="mb-3">
-                <label htmlFor="formGroupExampleInput2" className="form-label">
-                  Description
-                </label>
-                <input
-                  type="text"
-                  className="form-control"
-                  id="formGroupExampleInput2"
-                  placeholder="a data structure is a data organization..."
-                  value={newDesc}
-                  onChange={handleCourseDescription}
-                />
-              </div>
-              <div className="col-12 d-flex justify-content-end">
-                <button type="submit"
-                  className="border-0 text-decoration-none px-3 py-1 rounded-4 round-btn ">
-                  Create
-                </button>
-              </div>
-            </form>
+            </div>
           </div>
         </div>
-        {courses.map((courses)=>{
-          <CourseEdit
-          key={courses.id}
-          courseName={courses.title}
-          courseDesc={courses.desc}
-          id={courses.id}
-          courseUpdated={onCourseUpdated}
-          courseDeleted={onCourseDeleted}
-        />
-        })}
-        
-
-        {/* <div className='row justify-content-md-center'>
-          <div className='container-fluid card-cont d-flex flex-sm-row flex-column '>
-            <div className="card card-style col-lg-2">
-              <div className="card-body">
-                <h3 className="card-title">Course Name</h3>
-                <h6 class="card-subtitle mb-2 text-muted"><span className='changeColor'>Teacher Name</span></h6>
-                <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                <div className="d-flex justify-content-end">
-                  <button className='border-0 text-decoration-none px-3 py-1 mx-2 rounded-4 round-btn'><AiFillDelete /></button>
-                  <button className='border-0 text-decoration-none px-3 py-1 mx-2 rounded-4 round-btn'><FiEdit /></button>
-                </div>
-              </div>
-            </div>
-
-
-
-            <div className="card card-style col-lg-2">
-              <div className="card-body">
-                <h3 className="card-title">Course Name</h3>
-                <h6 class="card-subtitle mb-2 text-muted"><span className='changeColor'>Teacher Name</span></h6>
-                <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                <div className="d-flex justify-content-end">
-                  <button className='border-0 text-decoration-none px-3 py-1 mx-2 rounded-4 round-btn'><AiFillDelete /></button>
-                  <button className='border-0 text-decoration-none px-3 py-1 mx-2 rounded-4 round-btn'><FiEdit /></button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div> */}
-
-        
+        <table className="table">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Cover</th>
+              <th scope="col">Course title</th>
+              <th scope="col">Course Author</th>
+              <th scope="col">Published At</th>
+              <th scope="col">Updated At</th>
+              <th scope="col">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            { posts.map((post)=>{
+              return <tr key={post._id}>
+              <th scope="row">{post._id}</th>
+              <td>{post.title}</td>
+              <td>{post.body}</td>
+              <td>{post.createdAt}</td>
+              <td>{post.updatedAt}</td>
+              <td>
+                <button  className="btn btn-primary me-2">Edit</button>
+                <button className="btn btn-danger">Delete</button>
+              </td>
+            </tr>
+            }) }
+            
+          </tbody>
+        </table>
       </div>
     </>
-  )
+  );
 }

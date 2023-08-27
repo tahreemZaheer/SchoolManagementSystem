@@ -1,90 +1,90 @@
-import React, { useEffect, useState } from 'react'
-import { Course } from './Course'
+import React, { useState } from 'react'
+import { addPost } from '../../services/posts.service.js';
+import { useNavigate } from 'react-router-dom';
 import './Course.css'
 
-export const CreateCourseModal = ({ closeCreateCourse }) => {
+export const CreateCoursePage= () => {
 
-    const [showCourse, setShowCourse] = useState(false);
-
-
-    let [courses, setCourses] = useState([]);
-  let [newTitle, setNewTitle] = useState('');
+    const navigate = useNavigate();
+    const [title, setTitle] = useState('');
+    const [body, setBody] = useState('');
   
-  function addCourse(event) {
-    event.preventDefault();
-
-    let newCourse = {
-      id: courses.length + 1,
-      title: newTitle,
-      date: new Date()
-    };
-    setCourses([...courses, newCourse]);
-    setNewTitle('');
-    console.log(courses);
-  }
-
-  function handleInputChange(event) {
-    setNewTitle(event.target.value);
-  }
-
-    const handleShowCourse = (e) => {
-        e.preventDefault();
-        setShowCourse(true);
-    }
-
-    useEffect(() => {
-        document.body.style.overflowY = "hidden";
-        return () => {
-            document.body.style.overflowY = "scroll";
-        }
-    }, []);
+    const handleTitleChange = (event) => {
+        setTitle(event.target.value);
+      };
+    
+      const handleBodyChange = (event) => {
+        setBody(event.target.value);
+      };
+      const handlePublish = () => {
+        // Perform actions to publish the post, like sending data to a server
+        console.log('Course created:', { title, body});
+    
+        let formData= new FormData();
+        formData.append("title", title);
+        formData.append("body", body);
+   
+        addPost(formData).then((post)=>{
+            if(post){
+                navigate("/course");
+            }
+        })
+        // Reset the form
+        setTitle('');
+        setBody('');
+        setCoverPhoto(null);
+      };
+    
+      const handleCancel = () => {
+        // Perform actions to cancel post creation
+        console.log('Course creation canceled');
+        // Reset the form
+        setTitle('');
+        setBody('');
+  
+      };
+    
+    
 
     return (
-        <div className='containerr'>
-            <div className='modal-wrapper' onClick={closeCreateCourse}></div>
-            <div className='modal-container'>
-                <h3>Create Class</h3>
-                <form className="row g-3">
-                    <div className="mb-3">
-                        <label htmlFor="formGroupExampleInput" className="form-label">
-                            Course Name
-                        </label>
-                        <input
-                            type="text"
-                            className="form-control"
-                            id="formGroupExampleInput"
-                            placeholder="Data Structures"
-                        />
-                    </div>
-                    <div className="mb-3">
-                        <label htmlFor="formGroupExampleInput2" className="form-label">
-                            Description
-                        </label>
-                        <input
-                            type="text"
-                            className="form-control"
-                            id="formGroupExampleInput2"
-                            placeholder="a data structure is a data organization..."
-                        />
-                    </div>
-                    <div className="col-12 d-flex justify-content-end">
-                        <button type="submit"
-                            onClick={closeCreateCourse}
-                            className="border-0 text-decoration-none px-3 py-1 rounded-4 round-btn ">
-                            Cancel
-                        </button>
-
-                        
-                        <button type="submit"
-                            className="border-0 text-decoration-none px-3 py-1 rounded-4 round-btn "
-                            onSubmit={handleShowCourse}>
-                            Create
-                        </button>
-                    </div>
-                </form>
-            </div>
-            {showCourse && <Course />}
+        <div className="container mt-4">
+      <h1>Create Post</h1>
+      <form>
+        <div className="mb-3">
+          <label htmlFor="title" className="form-label">
+            Title
+          </label>
+          <input
+            type="text"
+            className="form-control"
+            id="title"
+            placeholder="Enter title"
+            value={title}
+            onChange={handleTitleChange}
+          />
         </div>
 
+        <div className="mb-3">
+          <label htmlFor="body" className="form-label">
+            Body
+          </label>
+          <textarea
+            className="form-control"
+            id="body"
+            rows="4"
+            placeholder="Enter body"
+            value={body}
+            onChange={handleBodyChange}
+          ></textarea>
+        </div>
+
+        <button type="button" className="btn btn-primary" onClick={handlePublish}>
+          Publish
+        </button>
+        <button type="button" className="btn btn-secondary" onClick={handleCancel}>
+          Cancel
+        </button>
+      </form>
+    </div>
     )
 }
