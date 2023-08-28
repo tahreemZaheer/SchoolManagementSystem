@@ -10,7 +10,7 @@ import { login } from '../../services/auth.service.js';
   console.log(password,email);
   const handleLogin = () => {
     let formData = new FormData();
-    formData.append("username", username);
+    formData.append("email", email);
     formData.append("password", password);
 
     login(formData).then((data)=>{
@@ -38,7 +38,7 @@ import { login } from '../../services/auth.service.js';
 
           </div>
           <div className="mb-3">
-            <label for="exampleInputPassword" className="form-label"><strong>Password</strong></label>
+            <label htmlFor="exampleInputPassword" className="form-label"><strong>Password</strong></label>
             <input type="password" className="form-control" 
             value={password}
             onChange={(e) => setPassword(e.target.value)}

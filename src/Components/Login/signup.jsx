@@ -19,7 +19,6 @@ const handleSignup = () => {
         if(user){
             navigate("/login");
           }
-    
     };
 
 
@@ -34,14 +33,14 @@ const handleSignup = () => {
                     <form>
                         <div className="mb-3">
                             <label htmlFor="exampleInputName" className="form-label"><strong>Name</strong></label>
-                            <input type="text" class="form-control" 
+                            <input type="text" className="form-control" 
                             value={username}
                             onChange={(e) => setUsername(e.target.value)}
                             id="exampleInputName" />
                         </div>
                         <div className="mb-3">
                             <label htmlFor="exampleInputEmail1" className="form-label"><strong>Email address</strong></label>
-                            <input type="email" class="form-control" 
+                            <input type="email" className="form-control" 
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
                             id="exampleInputEmail1" />
