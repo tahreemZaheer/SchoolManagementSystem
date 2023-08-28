@@ -24,8 +24,8 @@ export const Course = () => {
             <div className="d-flex justify-content-between">
               <h1>Manage Posts</h1>
               <div className="d-flex">
-              <Link to="add-post" className="btn btn-success float-end me-2">Manage Users</Link>
-              <Link to="add-post" className="btn btn-success float-end">+ Add Post</Link>
+              <Link to="createcourse" className="btn btn-success float-end me-2">Manage Users</Link>
+              <Link to="createcourse" className="btn btn-success float-end">+ Add Post</Link>
               </div>
             </div>
           </div>
@@ -34,9 +34,9 @@ export const Course = () => {
           <thead>
             <tr>
               <th scope="col">#</th>
-              <th scope="col">Cover</th>
               <th scope="col">Course title</th>
-              <th scope="col">Course Author</th>
+              <th scope="col">Description</th>
+              <th scope="col">Author</th>
               <th scope="col">Published At</th>
               <th scope="col">Updated At</th>
               <th scope="col">Actions</th>
@@ -48,6 +48,7 @@ export const Course = () => {
               <th scope="row">{post._id}</th>
               <td>{post.title}</td>
               <td>{post.body}</td>
+              <td>{post.teacher}</td>
               <td>{post.createdAt}</td>
               <td>{post.updatedAt}</td>
               <td>

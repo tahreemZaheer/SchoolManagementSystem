@@ -32,7 +32,6 @@ export const CreateCoursePage= () => {
         // Reset the form
         setTitle('');
         setBody('');
-        setCoverPhoto(null);
       };
     
       const handleCancel = () => {

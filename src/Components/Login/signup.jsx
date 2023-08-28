@@ -16,7 +16,10 @@ const handleSignup = () => {
     formData.append("password", password);
 
     signup(formData).then=(user)=>{
-         console.log(user);
+        if(user){
+            navigate("/login");
+          }
+    
     };
 
 
@@ -53,10 +56,10 @@ const handleSignup = () => {
 
                         </div>
                         <div className="d-flex justify-content-evenly">
-                        <button className='border-0 text-decoration-none px-3 py-1 rounded-4 round-btn'> SignUp </button>
+                        <button className='border-0 text-decoration-none px-3 py-1 rounded-4 round-btn' onClick={handleSignup}> SignUp </button>
                         
                         <Link to='/login'>
-                        <button className='border-0 text-decoration-none px-3 py-1 rounded-4 round-btn' onClick={handleSignup}> login </button></Link>
+                        <button className='border-0 text-decoration-none px-3 py-1 rounded-4 round-btn' > login </button></Link>
                         </div>
                     </form>
                 </div>

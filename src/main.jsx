@@ -10,6 +10,7 @@ import {FaHome} from 'react-icons/fa'
 import { Teachers } from './Components/Teachers/Teachers.jsx';
 import Login from './Components/Login/Login.jsx';
 import Signup from './Components/Login/signup.jsx';
+import { CreateCoursePage } from './Components/Course/CreateCourseModal.jsx';
 
 const routes=createBrowserRouter([{
   path:"/",
@@ -26,6 +27,10 @@ const routes=createBrowserRouter([{
 {
  path:'/login',
  element:<Login/> 
+},
+{
+  path:'/createcourse',
+  element:<CreateCoursePage/>
 },
 {
   path:'/signup',

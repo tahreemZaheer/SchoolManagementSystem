@@ -1,15 +1,26 @@
 import React,{useState} from "react"
-import { Link } from "react-router-dom";
-
+import { Link, useNavigate } from "react-router-dom";
+import { login } from '../../services/auth.service.js';
 
   function Login() {
-
+    const navigate= useNavigate();
     const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
     
   console.log(password,email);
-  const handleLogin = (e) => {
-e.preventDefault();
+  const handleLogin = () => {
+    let formData = new FormData();
+    formData.append("username", username);
+    formData.append("password", password);
+
+    login(formData).then((data)=>{
+
+      if(data.token){
+        localStorage.setItem("token", data.token);
+        navigate("/");    
+      }
+    });
+
   }
    return(
     
