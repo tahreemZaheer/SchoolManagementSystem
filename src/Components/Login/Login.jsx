@@ -1,64 +1,59 @@
-import React,{useState} from "react"
+import React, { useState } from "react"
 import { Link, useNavigate } from "react-router-dom";
 import { login } from '../../services/auth.service.js';
+import bgImg from '../../assets/pexels-bg-2.jpeg';
+import { useForm } from 'react-hook-form';
+import './form.css'
 
-  function Login() {
-    const navigate= useNavigate();
-    const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-    
-  console.log(password,email);
-  const handleLogin = () => {
+function Login() {
+  const navigate = useNavigate();
+  const { register, handleSubmit, watch, formState: { errors } } = useForm()
+
+  const handleLogin = (data,event) => {
+    event.preventDefault();
     let formData = new FormData();
-    formData.append("email", email);
-    formData.append("password", password);
-
-    login(formData).then((data)=>{
-
-      if(data.token){
-        localStorage.setItem("token", data.token);
-        navigate("/");    
-      }
-    });
-
-  }
-   return(
+    formData.append("email", data.email);
+    formData.append("password", data.password);
     
-    <div className='d-flex justify-content-center align-items-center vh-100 '>
-      <div className='login-container p-3 rounded w-25'>
+      login(formData).then((data) => {
+        try{
+        if (data.token) {
+          localStorage.setItem("token", data.token);
+          navigate("/admin");
+        }
+      }
+      catch(err){
+        alert("wrong email or password");
+        console.error(err);
+            }
+      });
+  }
+  return (
+    <>
+      <div className='app'>
+        <div className="register">
+          <div className="column-1">
+            <h2>Log in to your account</h2>
+            <form id='form1' className='flexForm flex-column' onSubmit={handleSubmit(handleLogin)}>
+              <input type="text" {...register("email", { required: true })} placeholder='email' />
+              {errors.email?.type === "required" && "Email is required"}
+              <input type="text" {...register("password", { required: true })} placeholder='password' />
+              {errors.password?.type === "required" && "password is required"}
+              <h6 className='text-to-login'>Don't have an account? <Link to='/signup'>Sign Up</Link></h6>
+              <button
 
-        <form>
-          
-          <div className="mb-3">
-            <label htmlFor="exampleInputEmail1" className="form-label"><strong>Email address</strong></label>
-            <input type="email" className="form-control" 
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            id="exampleInputEmail1" />
+                className='btn'>Log In</button>
+            </form>
 
           </div>
-          <div className="mb-3">
-            <label htmlFor="exampleInputPassword" className="form-label"><strong>Password</strong></label>
-            <input type="password" className="form-control" 
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            id="exampleInputPassword" />
-
+          <div className="column-2">
+            <img src={bgImg} alt="" />
           </div>
-          <div className="mb-3 d-flex justify-content-evenly">
- 
-          <button 
-          
-          className='border-0 text-decoration-none px-3 py-1 rounded-4 round-btn '
-          onClick={handleLogin}>log in</button>
-          
-          <Link to='/signup'><button className='border-0 text-decoration-none px-3 py-1 rounded-4 round-btn '>Create Account</button></Link>
-          
-         </div>
-         </form>
-      </div>
+        </div>
       </div>
 
-    );
+    </>
+
+  );
 }
-        export default Login
+export default Login

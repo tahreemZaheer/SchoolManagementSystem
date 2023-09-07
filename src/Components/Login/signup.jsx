@@ -20,10 +20,6 @@ const handleSignup = () => {
             navigate("/login");
           }
     };
-
-
-    
-
 };
     
         return(

@@ -26,3 +26,7 @@ li{
         text-decoration: underline;
     }
 }
+.bg-navbar{
+    /* background-color: rgba(194,185,186,255); */
+    background-color: white;
+}

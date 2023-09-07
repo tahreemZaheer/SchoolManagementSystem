@@ -16,6 +16,7 @@ export const CreateCoursePage= () => {
       const handleBodyChange = (event) => {
         setBody(event.target.value);
       };
+      
       const handlePublish = () => {
         // Perform actions to publish the post, like sending data to a server
         console.log('Course created:', { title, body});
@@ -26,7 +27,7 @@ export const CreateCoursePage= () => {
    
         addPost(formData).then((post)=>{
             if(post){
-                navigate("/course");
+                navigate("/admin");
             }
         })
         // Reset the form
@@ -40,12 +41,13 @@ export const CreateCoursePage= () => {
         // Reset the form
         setTitle('');
         setBody('');
-  
+  navigate('/admin');
       };
     
     
 
     return (
+      <div className='containerr container-fluid'>
         <div className="container mt-4">
       <h1>Create Post</h1>
       <form>
@@ -84,6 +86,7 @@ export const CreateCoursePage= () => {
           Cancel
         </button>
       </form>
+    </div>
     </div>
     )
 }
