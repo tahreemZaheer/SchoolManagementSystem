@@ -1,6 +1,6 @@
 import axios from "axios"
-const apiURL = "http://localhost:8080/"
-const adminUrl = "http://localhost:8080/admin/"
+const apiURL = "https://server-school-management-system.vercel.app/"
+const adminUrl = "https://server-school-management-system.vercel.app/admin/"
 export const getCourse = async()=>{
     try{
         let response = await axios.get(apiURL+"course");

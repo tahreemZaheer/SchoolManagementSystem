@@ -1,4 +1,4 @@
-const apiURL = "http://localhost:8080/";
+const apiURL = "https://server-school-management-system.vercel.app/";
 
 import axios from "axios";
 export const login = async(formData) => {
