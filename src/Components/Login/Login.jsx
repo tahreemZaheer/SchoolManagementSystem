@@ -37,7 +37,7 @@ function Login() {
             <form id='form1' className='flexForm flex-column' onSubmit={handleSubmit(handleLogin)}>
               <input type="text" {...register("email", { required: true })} placeholder='email' />
               {errors.email?.type === "required" && "Email is required"}
-              <input type="text" {...register("password", { required: true })} placeholder='password' />
+              <input type="password" {...register("password", { required: true })} placeholder='password' />
               {errors.password?.type === "required" && "password is required"}
               <h6 className='text-to-login'>Don't have an account? <Link to='/signup'>Sign Up</Link></h6>
               <button
